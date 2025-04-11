@@ -1,1 +1,1 @@
-# jingdong-crm-bundle
+# 京东CRM
