@@ -6,11 +6,13 @@ services:
 
   JingdongCrmBundle\Command\:
     resource: '../../Command/'
-  JingdongCrmBundle\Controller\:
-    resource: '../../Controller/'
+    exclude: '../../Command/.gitignore'
   JingdongCrmBundle\EventSubscriber\:
     resource: '../../EventSubscriber/'
+    exclude: '../../EventSubscriber/.gitignore'
   JingdongCrmBundle\Repository\:
     resource: '../../Repository/'
+    exclude: '../../Repository/.gitignore'
   JingdongCrmBundle\Service\:
     resource: '../../Service/'
+    exclude: '../../Service/.gitignore'
