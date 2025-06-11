@@ -31,7 +31,7 @@ class JingdongCrmExtensionTest extends TestCase
         try {
             $this->extension->load([], $this->container);
             $this->assertTrue(true, '无异常抛出，配置加载成功');
-        } catch  (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->markTestSkipped('配置加载失败: ' . $e->getMessage());
         }
     }
@@ -62,7 +62,7 @@ class JingdongCrmExtensionTest extends TestCase
             
             $this->assertTrue($defaultsDefinition->isAutowired());
             $this->assertTrue($defaultsDefinition->isAutoconfigured());
-        } catch  (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->markTestSkipped('无法测试服务默认配置: ' . $e->getMessage());
         }
     }
@@ -82,7 +82,7 @@ class JingdongCrmExtensionTest extends TestCase
         try {
             $this->extension->load([], $container);
             $this->assertTrue(true, '配置加载无异常');
-        } catch  (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->markTestSkipped('无法加载服务配置，可能是因为目录结构不完整：' . $e->getMessage());
         }
     }
