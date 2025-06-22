@@ -1,6 +1,6 @@
 <?php
 
-namespace JingdongCrmBundle\Tests\Unit\DependencyInjection;
+namespace JingdongCrmBundle\Tests\DependencyInjection;
 
 use JingdongCrmBundle\DependencyInjection\JingdongCrmExtension;
 use PHPUnit\Framework\TestCase;

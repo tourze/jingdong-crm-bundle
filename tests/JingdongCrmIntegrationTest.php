@@ -1,15 +1,26 @@
 <?php
 
-namespace JingdongCrmBundle\Tests\Integration;
+namespace JingdongCrmBundle\Tests;
 
 use JingdongCrmBundle\JingdongCrmBundle;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tourze\IntegrationTestKernel\IntegrationTestKernel;
 
 class JingdongCrmIntegrationTest extends KernelTestCase
 {
     protected static function getKernelClass(): string
     {
         return IntegrationTestKernel::class;
+    }
+    
+    protected static function createKernel(array $options = []): IntegrationTestKernel
+    {
+        return new IntegrationTestKernel(
+            $options['environment'] ?? 'test',
+            $options['debug'] ?? true,
+            [JingdongCrmBundle::class => ['all' => true]],
+            []
+        );
     }
 
     protected function setUp(): void

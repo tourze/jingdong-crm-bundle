@@ -1,6 +1,6 @@
 <?php
 
-namespace JingdongCrmBundle\Tests\Unit;
+namespace JingdongCrmBundle\Tests;
 
 use JingdongCrmBundle\JingdongCrmBundle;
 use PHPUnit\Framework\TestCase;
