@@ -2,81 +2,63 @@
 
 namespace JingdongCrmBundle\Tests;
 
+use JingdongCrmBundle\DependencyInjection\JingdongCrmExtension;
 use JingdongCrmBundle\JingdongCrmBundle;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Tourze\IntegrationTestKernel\IntegrationTestKernel;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Tourze\PHPUnitSymfonyKernelTest\AbstractIntegrationTestCase;
 
-class JingdongCrmIntegrationTest extends KernelTestCase
+/**
+ * @internal
+ */
+#[CoversClass(JingdongCrmBundle::class)]
+#[RunTestsInSeparateProcesses]
+final class JingdongCrmIntegrationTest extends AbstractIntegrationTestCase
 {
-    protected static function getKernelClass(): string
+    protected function onSetUp(): void
     {
-        return IntegrationTestKernel::class;
-    }
-    
-    protected static function createKernel(array $options = []): IntegrationTestKernel
-    {
-        return new IntegrationTestKernel(
-            $options['environment'] ?? 'test',
-            $options['debug'] ?? true,
-            [JingdongCrmBundle::class => ['all' => true]],
-            []
-        );
-    }
-
-    protected function setUp(): void
-    {
-        self::bootKernel();
+        // 集成测试的设置逻辑
     }
 
     /**
-     * 测试Bundle在内核中是否正确加载
+     * 测试Extension是否能正常加载
      */
-    public function testKernelBoot_bundleLoaded(): void
+    public function testExtensionLoad(): void
     {
-        $kernel = self::$kernel;
-        
-        // 验证Bundle是否已被注册
-        $bundles = $kernel->getBundles();
-        $bundleFound = false;
-        
-        foreach ($bundles as $bundle) {
-            if ($bundle instanceof JingdongCrmBundle) {
-                $bundleFound = true;
-                break;
-            }
-        }
-        
-        $this->assertTrue($bundleFound, 'JingdongCrmBundle 应该被加载');
+        $extension = new JingdongCrmExtension();
+        $container = new ContainerBuilder();
+
+        // 设置基本参数
+        $container->setParameter('kernel.bundles', []);
+        $container->setParameter('kernel.debug', true);
+        $container->setParameter('kernel.environment', 'test');
+
+        // 测试Extension能正常加载
+        $extension->load([], $container);
+        $this->assertInstanceOf(ContainerBuilder::class, $container);
     }
 
     /**
-     * 测试服务是否正确连接
+     * 测试Extension的别名
      */
-    public function testServiceWiring_servicesAreWiredCorrectly(): void
+    public function testExtensionGetAlias(): void
     {
-        $container = self::$kernel->getContainer();
-
-        // 测试服务容器是否正确配置
-        $this->assertTrue($container->has('kernel'));
-        
-        // 由于当前Bundle可能没有具体的服务实现，这里只测试基本的服务连接功能
-        // 当有具体服务实现后，应该补充相应的测试断言
+        $extension = new JingdongCrmExtension();
+        $this->assertEquals('jingdong_crm', $extension->getAlias());
     }
 
     /**
-     * 测试Bundle加载后的基本环境
+     * 测试Bundle的基本功能
      */
-    public function testWithCustomConfig_configLoaded(): void
+    public function testBundleBasicFunctionality(): void
     {
-        $kernel = self::$kernel;
-        $container = $kernel->getContainer();
-        
-        // 验证内核和容器已正确初始化
-        $this->assertNotNull($kernel);
-        $this->assertNotNull($container);
-        $this->assertTrue($container->hasParameter('kernel.secret'));
-        
-        // 由于设置自定义配置存在挑战，我们这里只验证基本参数存在
-        $this->assertNotEmpty($container->getParameter('kernel.secret'));
+        $reflection = new \ReflectionClass(JingdongCrmBundle::class);
+        $bundle = $reflection->newInstance();
+        $this->assertEquals('JingdongCrmBundle', $bundle->getName());
+
+        // 验证Bundle能正确创建Extension
+        $extension = $bundle->getContainerExtension();
+        $this->assertInstanceOf(JingdongCrmExtension::class, $extension);
     }
-} 
+}

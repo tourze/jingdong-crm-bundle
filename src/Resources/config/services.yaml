@@ -4,15 +4,55 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-  JingdongCrmBundle\Command\:
-    resource: '../../Command/'
-    exclude: '../../Command/.gitignore'
-  JingdongCrmBundle\EventSubscriber\:
-    resource: '../../EventSubscriber/'
-    exclude: '../../EventSubscriber/.gitignore'
-  JingdongCrmBundle\Repository\:
-    resource: '../../Repository/'
-    exclude: '../../Repository/.gitignore'
-  JingdongCrmBundle\Service\:
-    resource: '../../Service/'
-    exclude: '../../Service/.gitignore'
+  # Controllers
+  JingdongCrmBundle\Controller\Admin\ContactCrudController:
+    tags: ['controller.service_arguments']
+
+  JingdongCrmBundle\Controller\Admin\CustomerCrudController:
+    tags: ['controller.service_arguments']
+
+  JingdongCrmBundle\Controller\Admin\LeadCrudController:
+    tags: ['controller.service_arguments']
+
+  JingdongCrmBundle\Controller\Admin\OpportunityCrudController:
+    tags: ['controller.service_arguments']
+
+  JingdongCrmBundle\Controller\Admin\OrderCrudController:
+    tags: ['controller.service_arguments']
+
+  JingdongCrmBundle\Controller\Admin\ProductCrudController:
+    tags: ['controller.service_arguments']
+
+  # Repositories
+  JingdongCrmBundle\Repository\ContactRepository:
+    arguments:
+      $registry: '@doctrine'
+    tags: ['doctrine.repository_service']
+
+  JingdongCrmBundle\Repository\CustomerRepository:
+    arguments:
+      $registry: '@doctrine'
+    tags: ['doctrine.repository_service']
+
+  JingdongCrmBundle\Repository\LeadRepository:
+    arguments:
+      $registry: '@doctrine'
+    tags: ['doctrine.repository_service']
+
+  JingdongCrmBundle\Repository\OpportunityRepository:
+    arguments:
+      $registry: '@doctrine'
+    tags: ['doctrine.repository_service']
+
+  JingdongCrmBundle\Repository\OrderRepository:
+    arguments:
+      $registry: '@doctrine'
+    tags: ['doctrine.repository_service']
+
+  JingdongCrmBundle\Repository\ProductRepository:
+    arguments:
+      $registry: '@doctrine'
+    tags: ['doctrine.repository_service']
+
+  # Services
+  JingdongCrmBundle\Service\AdminMenu: ~

@@ -1,0 +1,23 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # DataFixtures for development environment
+  JingdongCrmBundle\DataFixtures\ContactFixtures:
+    tags: ['doctrine.fixture.orm']
+
+  JingdongCrmBundle\DataFixtures\CustomerFixtures:
+    tags: ['doctrine.fixture.orm']
+
+  JingdongCrmBundle\DataFixtures\LeadFixtures:
+    tags: ['doctrine.fixture.orm']
+
+  JingdongCrmBundle\DataFixtures\OpportunityFixtures:
+    tags: ['doctrine.fixture.orm']
+
+  JingdongCrmBundle\DataFixtures\OrderFixtures:
+    tags: ['doctrine.fixture.orm']
+
+  JingdongCrmBundle\DataFixtures\ProductFixtures:
+    tags: ['doctrine.fixture.orm']
