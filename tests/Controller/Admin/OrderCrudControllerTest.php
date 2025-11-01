@@ -83,8 +83,7 @@ final class OrderCrudControllerTest extends AbstractEasyAdminControllerTestCase
 
     public function testCreateOrder(): void
     {
-        $client = self::createClientWithDatabase();
-        $this->loginAsAdmin($client);
+        $client = self::createAuthenticatedClient();
 
         // 首先创建一个客户
         $customer = new Customer();
