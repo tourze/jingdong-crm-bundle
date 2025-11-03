@@ -12,6 +12,7 @@ use Tourze\BundleDependency\BundleDependencyInterface;
 use Tourze\DoctrineSnowflakeBundle\DoctrineSnowflakeBundle;
 use Tourze\DoctrineTimestampBundle\DoctrineTimestampBundle;
 use Tourze\EasyAdminEnumFieldBundle\EasyAdminEnumFieldBundle;
+use Tourze\EasyAdminMenuBundle\EasyAdminMenuBundle;
 
 class JingdongCrmBundle extends Bundle implements BundleDependencyInterface
 {
@@ -27,6 +28,7 @@ class JingdongCrmBundle extends Bundle implements BundleDependencyInterface
             EasyAdminBundle::class => ['all' => true],
             EasyAdminEnumFieldBundle::class => ['all' => true],
             TwigBundle::class => ['all' => true],
+            EasyAdminMenuBundle::class => ['all' => true],
         ];
     }
 }
